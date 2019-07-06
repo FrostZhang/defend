@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.soulgame.sgsdk.tgsdklib">
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <application android:icon="@drawable/app_icon" android:label="@string/app_name" android:hardwareAccelerated="true">
+    <activity android:name="com.soulgame.sgsdk.tgsdklib.unity.TGSDKUnityActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+      <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+    </activity>
+    <!-- Mobvista -->
+    <provider android:name="com.mintegral.msdk.base.utils.MTGFileProvider" android:authorities="com.asher.defend.mtgFileProvider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/mtg_provider_paths" />
+    </provider>
+    <!--Vungle-->
+    <provider android:name="com.soulgame.sgsdk.adsdk.TGSDKADVungleFileProvider" android:authorities="com.asher.defend.vungle.apkprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths" />
+    </provider>
+    <!-- Yoads -->
+    <provider android:name="com.yomob.yomobads.ad.YomobFileProvider" android:authorities="com.asher.defend.yomob.fileprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/yomob_paths" />
+    </provider>
+  </application>
+</manifest>

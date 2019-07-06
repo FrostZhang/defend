@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.Asher.Defend">
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+  <!-- uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"  /-->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.GET_TASKS" />
+  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+  <application android:icon="@drawable/app_icon" android:label="@string/app_name" android:hardwareAccelerated="true">
+    <activity android:name="com.soulgame.sgsdk.tgsdklib.unity.TGSDKUnityActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+      <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+    </activity>
+    <!-- Shenqiad -->
+    <provider android:name="com.shenqi.sdk.SQFileProvider" android:authorities="com.Asher.Defend.android7.fileprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/shenqi_file_paths" />
+    </provider>
+    <!-- SigMob -->
+    <provider android:name="com.soulgame.sgsdk.adsdk.TGSDKADSigmobFileProvider" android:authorities="com.Asher.Defend.sigprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/sigmob_provider_paths" />
+    </provider>
+    <!-- Guangdiantong -->
+    <provider android:name="android.support.v4.content.FileProvider" android:authorities="com.Asher.Defend.fileprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/gdt_file_path" />
+    </provider>
+    <!-- Baidu -->
+    <provider android:name="com.baidu.mobads.openad.FileProvider" android:authorities="com.Asher.Defend.bd.provider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/bd_file_paths" />
+    </provider>
+    <!-- Mobvista -->
+    <provider android:name="com.mintegral.msdk.base.utils.MTGFileProvider" android:authorities="com.Asher.Defend.mtgFileProvider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/mtg_provider_paths" />
+    </provider>
+    <!-- UniPlay -->
+    <provider android:name="com.uniplay.adsdk.UniPlayFileProvider" android:authorities="com.Asher.Defend.uniplay.fileprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/uniplay_file_path" />
+    </provider>
+    <!--Vungle-->
+    <provider android:name="com.soulgame.sgsdk.adsdk.TGSDKADVungleFileProvider" android:authorities="com.Asher.Defend.vungle.apkprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths" />
+    </provider>
+    <!-- Yoads -->
+    <provider android:name="com.yomob.yomobads.ad.YomobFileProvider" android:authorities="com.Asher.Defend.yomob.fileprovider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/yomob_paths" />
+    </provider>
+    <!-- ByteDance -->
+    <provider android:name="com.bytedance.sdk.openadsdk.TTFileProvider" android:authorities="com.Asher.Defend.TTFileProvider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/tt_file_paths" />
+    </provider>
+    <provider android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider" android:authorities="com.Asher.Defend.TTMultiProvider" android:exported="false" />
+    <!-- OneWay -->
+    <provider android:name="mobi.oneway.sdk.common.OWProvider" android:authorities="com.Asher.Defend.provider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/ow_file_paths" />
+    </provider>
+    <provider android:name="com.liulishuo.okdownload.OkDownloadProvider" android:authorities="com.Asher.Defend.com.liulishuo.okdownload" android:exported="false" />
+  </application>
+</manifest>
