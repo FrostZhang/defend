@@ -7,15 +7,16 @@ using UnityEngine.SceneManagement;
 public class HomeUI : MonoBehaviour {
     public Button start, shop, chose, set,music,ret,cleart;
     public GameObject main, setobj;
-
+    
 	void Start () {
+
         start.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("Stage");
+            GlobelControl.instance.panelControl.OpenPanel<StageChoose>();
         });
         shop.onClick.AddListener(() =>
         {
-           
+            GlobelControl.instance.panelControl.OpenPanel<Shop>();
         });
         cleart.onClick.AddListener(() =>
         {
@@ -29,8 +30,7 @@ public class HomeUI : MonoBehaviour {
         {
             main.SetActive(false);
             setobj.SetActive(true);
-            bool m = PlayerPrefs.GetInt("music", 1) == 1 ? true : false;
-            if (m)
+            if (GlobelControl.instance.music)
             {
                 music.GetComponentInChildren<Text>().text = "声音:开";
             }
@@ -41,17 +41,8 @@ public class HomeUI : MonoBehaviour {
         });
         music.onClick.AddListener(() =>
         {
-            bool m = PlayerPrefs.GetInt("music", 1) == 1 ? true : false;
-            m = !m;
-            if (m)
-            {
-                PlayerPrefs.SetInt("music", 1);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("music", 0);
-            }
-            if (m)
+            GlobelControl.instance.Setmusic();
+            if (GlobelControl.instance.music)
             {
                 music.GetComponentInChildren<Text>().text = "声音:开";
             }
@@ -66,5 +57,5 @@ public class HomeUI : MonoBehaviour {
             setobj.SetActive(false);
         });
     }
-	
+
 }

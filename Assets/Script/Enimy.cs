@@ -46,10 +46,11 @@ public class Enimy : MonoBehaviour
         {
             ai.isStopped = true;
             Kill();
+            //敌人死亡  获得收益
             int c = 15 + GameControll.instance.activeSw.target.jddata.level * 5;
             GameUI.instance.ShowGetCoin(c, transform.position);
             GameControll.instance.GetCoin(c);
-            Instantiate(GameControll.instance.pointEff, transform.position, Quaternion.identity);
+            //Instantiate(GameControll.instance.pointEff, transform.position, Quaternion.identity);
         }
     }
 
@@ -59,6 +60,7 @@ public class Enimy : MonoBehaviour
         {
             return;
         }
+        Instantiate(dieEff, transform.position, Quaternion.identity);
         GameControll.instance.activeSw.OnenimyDie(this);
         Destroy(gameObject, 0.25f);
         die = true;

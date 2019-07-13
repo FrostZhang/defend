@@ -11,7 +11,7 @@ public class PausePanel : MonoBehaviour
     private void Start()
     {
         AdScript.instance.ShowPauseAd(true);
-        if (GameControll.instance.music)
+        if (GlobelControl.instance.music)
         {
             mus.GetComponentInChildren<Text>().text = "声音:开";
         }
@@ -22,13 +22,13 @@ public class PausePanel : MonoBehaviour
         GameControll.instance.Pause(true);
         reture.onClick.AddListener(() =>
         {
-            GameUI.instance.panelControl.Close();
+            GlobelControl.instance.panelControl.Close();
             GameControll.instance.Pause(false);
         });
         mus.onClick.AddListener(() =>
         {
-            GameControll.instance.Setmusic();
-            if (GameControll.instance.music)
+            GlobelControl.instance.Setmusic();
+            if (GlobelControl.instance.music)
             {
                 mus.GetComponentInChildren<Text>().text = "声音:开";
             }
@@ -37,7 +37,9 @@ public class PausePanel : MonoBehaviour
                 mus.GetComponentInChildren<Text>().text = "声音:关";
             }
         });
-        shop.onClick.AddListener(() => { });
+        shop.onClick.AddListener(() => {
+            GlobelControl.instance.panelControl.OpenPanel<Shop>();
+        });
         retry.onClick.AddListener(() =>
         {
             //GameUI.instance.panelControl.Close();

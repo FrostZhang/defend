@@ -21,6 +21,8 @@ public class Sw : MonoBehaviour
 
     private int killnum;
 
+    public List<Enimy> ess;
+
     //1级 30个兵 50级 125兵
     public void Ini(int lv)
     {
@@ -32,7 +34,7 @@ public class Sw : MonoBehaviour
     IEnumerator inicapos()
     {
         var t = Camera.main.transform;
-        var dir =Vector3.Normalize( t.position - capos);
+        var dir = Vector3.Normalize(t.position - capos);
         t.position += dir * 2.5f;
         while (Vector3.Distance(t.position, capos) > 0.1f)
         {
@@ -42,8 +44,8 @@ public class Sw : MonoBehaviour
         t.position = capos;
         yield return null;
         GameUI.instance.ShowSwJd(this);
-        GameUI.instance.ShowStage(GameControll.instance.data.stagelevel);
-        GameUI.instance.joy.line.position = target.transform.position+Vector3.up*0.2F;
+        GameUI.instance.ShowStage(GlobelControl.instance.chooseStage+1);
+        GameUI.instance.joy.line.position = target.transform.position + Vector3.up;
         GameUI.instance.Ready(() =>
         {
             target.Ini();
@@ -88,10 +90,12 @@ public class Sw : MonoBehaviour
                     {
                         Transform pa = swpos[n];
                         var e = SwEnimy(pa);
-                        e.data.hp = 1;
-                        e.data.speed = 2;
+                        int lv = GlobelControl.instance.chooseStage;
+                        e.data.hp = (int)(0.1836f * lv + 0.8164f);
+                        e.data.speed = 2 + Random.Range(-0.5f, 0.5f);
                         e.data.att = 1;
                         e.ini(target.transform);
+                        ess.Add(e);
                         n++;
                         n = n >= swpos.Length ? 0 : n;
                         _enimynum++;
@@ -115,10 +119,12 @@ public class Sw : MonoBehaviour
                         Transform pa = swpos[n];
                         var e = SwEnimy(pa);
                         e.transform.localScale = e.transform.localScale * 1.5f;
-                        e.data.hp = 3;
-                        e.data.speed = 1.75f;
-                        e.data.att = 1;
+                        int lv = GlobelControl.instance.chooseStage;
+                        e.data.hp = (int)(0.3469F * lv + 2.6531F);
+                        e.data.speed = 1.75f + Random.Range(-0.5f, 0.5f);
+                        e.data.att = 1+Random.Range(1,3);
                         e.ini(target.transform);
+                        ess.Add(e);
                         n++;
                         n = n >= swpos.Length ? 0 : n;
                         _bossNum++;
@@ -134,11 +140,13 @@ public class Sw : MonoBehaviour
 
     public void OnenimyDie(Enimy e)
     {
+        ess.Remove(e);
         killnum++;
         if (killnum >= (enimynum + bossNum))
         {
             Debug.Log(killnum + " " + enimynum + " " + bossNum);
-            GameUI.instance.panelControl.OpenPanel<WinPanel>();
+            GlobelControl.instance.panelControl.OpenPanel<WinPanel>();
+            ess.Clear();
             //准备win
         }
     }

@@ -10,46 +10,37 @@ public class GameControll : MonoBehaviour
     public bool canclick = true;
     public float clickArea = 0.2f;
 
-    public GameData.CusData data;
-
-    public Transform[] guns;
-
-    public GameObject pointEff;
-    public AudioClip pointMusic;
 
     public Sw[] sws;
     public Sw activeSw;
 
-    public const string JDdata = "JDdata";
-    public const string Cusdata = "Cusdata";
-
     public Transform[] enimies;
     public Transform[] shuienimies;
-    public bool music;
 
     private void Awake()
     {
         instance = this;
+        GlobelControl.instance.panelControl.pa = FindObjectOfType<Canvas>().transform;
     }
 
     private void OnDestroy()
     {
+        if (GlobelControl.instance)
+        {
+            GlobelControl.instance.panelControl.Clear();
+        }
         instance = null;
     }
 
     void Start()
     {
-        music = PlayerPrefs.GetInt("music", 1) == 1 ? true : false;
         ReadJDdatas();
-        ReadCusd();
-        //test
-        //ChooseStage(testLv);
+        ChooseStage(GlobelControl.instance.chooseStage);
     }
-
 
     private void ReadJDdatas()
     {
-        string d = PlayerPrefs.GetString(JDdata);
+        string d = PlayerPrefs.GetString(GlobelControl.JDdata);
         if (!string.IsNullOrEmpty(d))
         {
             GameData.JDdatas ds = JsonUtility.FromJson<GameData.JDdatas>(d);
@@ -69,27 +60,6 @@ public class GameControll : MonoBehaviour
         }
     }
 
-    private void ReadCusd()
-    {
-        string cusd = PlayerPrefs.GetString(Cusdata);
-        var cd = JsonUtility.FromJson<GameData.CusData>(cusd);
-        if (cd != null)
-        {
-            data = cd;
-        }
-        else
-        {
-            data = new GameData.CusData() { money = 0, stagelevel = 1 };
-        }
-        ChooseStage(data.stagelevel);
-    }
-
-    public void SaveCusd()
-    {
-        string d = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString(Cusdata, d);
-    }
-
     public void SaveJDdatas()
     {
         GameData.JDdatas d = new GameData.JDdatas();
@@ -100,30 +70,16 @@ public class GameControll : MonoBehaviour
             d.fs.Add(sws[i].target.jddata);
         }
 
-        PlayerPrefs.SetString(JDdata, JsonUtility.ToJson(d));
+        PlayerPrefs.SetString(GlobelControl.JDdata, JsonUtility.ToJson(d));
     }
 
     public void GetCoin(int coinnum)
     {
-        data.money += coinnum;
-        GameUI.instance.Upcoin(data.money, true);
+        GlobelControl.instance.cusdata.money += coinnum;
+        GameUI.instance.Upcoin(GlobelControl.instance.cusdata.money, true);
         GameUI.instance.Showlv();
-        SaveCusd();
+        GlobelControl.instance.SaveCusd();
     }
-
-    public void Setmusic()
-    {
-        music = !music;
-        if (music)
-        {
-            PlayerPrefs.SetInt("music", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("music", 0);
-        }
-    }
-
 
     void Update()
     {
@@ -131,41 +87,11 @@ public class GameControll : MonoBehaviour
         {
             GameUI.instance.pause.onClick.Invoke();
         }
-        //if (!canclick)
-        //{
-        //    return;
-        //}
-        //else
-        //{
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        if (EventSystem.current.IsPointerOverGameObject())
-        //        {
-        //            return;
-        //        }
-
-        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //        RaycastHit hitInfo;
-        //        Debug.DrawRay(Camera.main.transform.position, ray.direction * 10, Color.red, 2f);
-        //        if (Physics.Raycast(ray, out hitInfo, 50))
-        //        {
-        //            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("House"))
-        //            {
-        //                Debug.Log("点击到了屋子");
-        //                return;
-        //            }
-        //            PlayMusic(pointMusic, hitInfo.point);
-        //            var t = Instantiate(fingerPoint, hitInfo.point, Quaternion.identity, transform);
-        //            t.Ini(clickArea, 1);
-        //            Destroy(t.gameObject, 0.1f);
-        //        }
-        //    }
-        //}
     }
 
     public void PlayMusic(AudioClip clip,Vector3 pos)
     {
-        if (music)
+        if (GlobelControl.instance.music)
         {
             AudioSource.PlayClipAtPoint(clip, pos,1);
         }
@@ -177,7 +103,8 @@ public class GameControll : MonoBehaviour
 
     public void ChooseStage(int lv)
     {
-        int l = (lv - 1) % sws.Length;
+        Debug.Log("选择关卡" + lv);
+        int l = lv % sws.Length;
         for (int i = 0; i < sws.Length; i++)
         {
             sws[i].gameObject.SetActive(false);

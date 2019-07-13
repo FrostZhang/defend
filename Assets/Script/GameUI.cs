@@ -9,7 +9,6 @@ public class GameUI : MonoBehaviour
 {
     public static GameUI instance;
 
-    public GamePanel panelControl;
 
     public Slider jdhp;
     public Text hptext;
@@ -24,7 +23,6 @@ public class GameUI : MonoBehaviour
     public Button pause;
 
     public Button fire;
-    public Transform bul;
     public Joy joy;
     public Transform[] ready;
 
@@ -33,7 +31,6 @@ public class GameUI : MonoBehaviour
         instance = this;
         dyText.gameObject.SetActive(false);
         jdhp.onValueChanged.AddListener(OnHpChange);
-        panelControl = new GamePanel(transform);
         coinT.text = string.Empty;
         jdhp.maxValue = 0;
         jdhp.value = 0;
@@ -45,31 +42,39 @@ public class GameUI : MonoBehaviour
         lvupbtn.GetComponent<Button>().onClick.AddListener(OnLvUp);
         pause.onClick.AddListener(() =>
         {
-            panelControl.OpenPanel<PausePanel>();
+           GlobelControl.instance.panelControl.OpenPanel<PausePanel>();
         });
+        Fire();
+    }
+
+    bool canfire;
+    private void Fire()
+    {
         fire.onClick.AddListener(() =>
         {
-            StartCoroutine(_fire());
+            if (canfire)
+            {
+                var t = Pool.Instance.Get("bul" + GlobelControl.instance.cusdata.gun,
+        joy.line.position, Quaternion.identity, GameControll.instance.activeSw.transform);
+                var bul = t.GetComponent<FingerPoint>();
+                bul.Ini(Vector3.Normalize(joy.line.right));
+                _fire = GlobelControl.instance.activegun.leng;
+                canfire = false;
+            }
         });
     }
 
-    IEnumerator _fire()
+    float _fire;
+    private void Update()
     {
-        var t = Instantiate(bul, joy.line.position,Quaternion.identity);
-        float ti = 0;
-        Vector3 d = Vector3.Normalize( joy.line.right);
-        while (true)
+        if (canfire)
         {
-            ti+=Time.deltaTime;
-            if (ti<5)
-            {
-                t.position += d;
-                yield return null;
-            }
-            else
-            {
-                yield break;
-            }
+            return;
+        }
+        _fire -= Time.deltaTime;
+        if (_fire < 0)
+        {
+            canfire = true;
         }
     }
 
@@ -87,7 +92,7 @@ public class GameUI : MonoBehaviour
 
     public void ShowSwJd(Sw sw)
     {
-        Upcoin(GameControll.instance.data.money, false);
+        Upcoin(GlobelControl.instance.cusdata.money, false);
         houselv.text = "LV: " + sw.target.jddata.level.ToString();
     }
 
@@ -97,7 +102,7 @@ public class GameUI : MonoBehaviour
         bool b = jd.LevelUp();  //检测是否升级成功
         if (b)
         {
-            Upcoin(GameControll.instance.data.money, true);
+            Upcoin(GlobelControl.instance.cusdata.money, true);
             houselv.text = "LV: " + jd.jddata.level.ToString();
         }
         Showlv();
@@ -109,7 +114,7 @@ public class GameUI : MonoBehaviour
         var jd = GameControll.instance.activeSw.target;
         var lv = jd.jddata.level;
         int pay = lv * 1018 - 868;
-        if (GameControll.instance.data.money >= pay)
+        if (GlobelControl.instance.cusdata.money >= pay)
         {
             lvupbtn.gameObject.SetActive(true);
             if (lvtween == null || !lvtween.IsPlaying())
@@ -131,20 +136,21 @@ public class GameUI : MonoBehaviour
 
     public void Ready(Action act)
     {
-        GameControll.instance.PlayMusic(readymusic,Camera.main.transform.position);
+        GameControll.instance.PlayMusic(readymusic, Camera.main.transform.position);
         //AudioSource.PlayClipAtPoint(readymusic, Camera.main.transform.position);
-       ready[0].localScale = Vector3.zero;
-        ready[0].DOScale(Vector2.one, 0.5f).SetLoops(2,LoopType.Yoyo).OnComplete(() =>
-        {
-            ready[0].localScale = Vector3.zero;
-            ready[1].localScale = Vector3.zero;
-            ready[1].DOScale(Vector2.one, 0.5f).SetLoops(2, LoopType.Yoyo).OnComplete(()=> {
-                if (act!=null)
-                {
-                    act.Invoke();
-                }
-            });
-        });
+        ready[0].localScale = Vector3.zero;
+        ready[0].DOScale(Vector2.one, 0.5f).SetLoops(2, LoopType.Yoyo).OnComplete(() =>
+         {
+             ready[0].localScale = Vector3.zero;
+             ready[1].localScale = Vector3.zero;
+             ready[1].DOScale(Vector2.one, 0.5f).SetLoops(2, LoopType.Yoyo).OnComplete(() =>
+             {
+                 if (act != null)
+                 {
+                     act.Invoke();
+                 }
+             });
+         });
     }
 
 

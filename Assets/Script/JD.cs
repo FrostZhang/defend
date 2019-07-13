@@ -12,6 +12,8 @@ public class JD : MonoBehaviour
     Tween anim;
     public Transform lvUppos;
 
+    public float Hurt { get { return (float)hp / hpmax; } }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enimy"))
@@ -28,14 +30,13 @@ public class JD : MonoBehaviour
                         transform.GetChild(0).localScale = Vector3.one;
                     });
                 }
-                Instantiate(e.dieEff, e.transform.position, Quaternion.identity);
             }
             else
             {
                 //守护失败
                 hp = 0;
                 GameUI.instance.jdhp.value = hp;
-                GameUI.instance.panelControl.OpenPanel<GameOver>();
+                GlobelControl.instance.panelControl.OpenPanel<GameOver>();
             }
             e.Kill();
         }
@@ -64,9 +65,9 @@ public class JD : MonoBehaviour
     {
         var lv = jddata.level;
         int pay = lv * 1018 - 868;
-        if (GameControll.instance.data.money >= pay)
+        if (GlobelControl.instance.cusdata.money >= pay)
         {
-            GameControll.instance.data.money -= pay;
+            GlobelControl.instance.cusdata.money -= pay;
             jddata.level++;
             var i = jddata.level * 2 + 8;
             var up = i - hpmax;

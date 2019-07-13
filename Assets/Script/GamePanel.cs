@@ -56,4 +56,9 @@ public class GamePanel
             }
         }
     }
+
+    public void Clear()
+    {
+        cps.Clear();
+    }
 }

@@ -40,7 +40,7 @@
 			{
 				float2 uv : TEXCOORD0;
 				float3 worldnor:NORMAL;
-				float3 worldlightdir:TEXCOORD1;
+				float3 worldlightdir:TEXCOORD3;
 				float3 worldviewdir:TEXCOORD2;
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;

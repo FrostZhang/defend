@@ -24,6 +24,7 @@ public class AdScript : MonoBehaviour
         }
         else
         {
+            Debug.Log("Already have AdScript.");
             Destroy(gameObject);
             return;
         }
@@ -172,12 +173,8 @@ public class AdScript : MonoBehaviour
 
     private bool ShowAd(AdType adtp)
     {
-        if (!preloadAd || !canjiangli)
-        {
-            return false;
-        }
         int i = (int)adtp;
-        if (i < scenes.Length)
+        if (scenes!=null && i < scenes.Length)
         {
             string sceneid = scenes[i];
             if (TGSDK.CouldShowAd(sceneid))
@@ -204,10 +201,8 @@ public class AdScript : MonoBehaviour
 
     public void ShowPauseAd(bool show)
     {
-        if (!preloadAd || !chapin)
+        if (scenes != null && scenes.Length>0)
         {
-            return;
-        }
             string sceneid = scenes[1];
             if (show)
             {
@@ -224,6 +219,7 @@ public class AdScript : MonoBehaviour
             {
                 TGSDK.CloseBanner(sceneid);
             }
+        }
     }
 
     public void ShowTestView()
