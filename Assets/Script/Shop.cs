@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
     public Button re;
     public Transform pa;
     private Transform preb;
+    public Text coin;
     // Use this for initialization
     void Start()
     {
@@ -18,6 +19,7 @@ public class Shop : MonoBehaviour
         preb = pa.GetChild(0);
         preb.gameObject.SetActive(false);
         Ini();
+        coin.text = GlobelControl.instance.cusdata.money.ToString();
     }
 
     private void Ini()
@@ -80,7 +82,7 @@ public class Shop : MonoBehaviour
                 GlobelControl.instance.ChooseGun(n);
             }
         });
-        t.Find("pay").GetComponent<Text>().text = "已拥有";
+        Language.instance.GetLan(t.Find("pay").GetComponent<Text>(), "1026");
         t.Find("buy").gameObject.SetActive(false);
     }
 }

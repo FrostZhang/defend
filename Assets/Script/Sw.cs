@@ -33,9 +33,10 @@ public class Sw : MonoBehaviour
 
     IEnumerator inicapos()
     {
+        yield return null;
         var t = Camera.main.transform;
         var dir = Vector3.Normalize(t.position - capos);
-        t.position += dir * 2.5f;
+        t.position = capos + dir * 3f;
         while (Vector3.Distance(t.position, capos) > 0.1f)
         {
             t.position += (capos - t.position).normalized * Time.deltaTime * 3;
@@ -91,7 +92,7 @@ public class Sw : MonoBehaviour
                         Transform pa = swpos[n];
                         var e = SwEnimy(pa);
                         int lv = GlobelControl.instance.chooseStage;
-                        e.data.hp = (int)(0.1836f * lv + 0.8164f);
+                        e.data.hp =Mathf.RoundToInt(0.1836f * lv + 0.8164f);
                         e.data.speed = 2 + Random.Range(-0.5f, 0.5f);
                         e.data.att = 1;
                         e.ini(target.transform);

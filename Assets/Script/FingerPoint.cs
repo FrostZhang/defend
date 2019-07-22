@@ -28,10 +28,20 @@ public class FingerPoint : MonoBehaviour
 
     BoxCollider bc;
     private Transform tr;
+    [SerializeField]
+    float _chuan;
     private void Awake()
     {
         tr = transform;
         bc = tr.GetComponent<BoxCollider>();
+        tempEnimys = new List<Transform>();
+    }
+
+    int jdlv;
+    private void OnEnable()
+    {
+        tr.GetComponent<AudioSource>().mute = !GlobelControl.instance.music;
+        jdlv = GameControll.instance.activeSw.target.jddata.level;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,32 +49,12 @@ public class FingerPoint : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enimy"))
         {
             var e = other.gameObject.GetComponent<Enimy>();
-            e.Hurt((int)(att * 5));
-            if (chuan > 0)
+            e.Hurt((int)((att + jdlv * 0.01f) * 5));
+            if (_chuan > 0)
             {
-                if (Random.Range(0, 1) < chuan)
+                if (Random.Range(0, 1f) < _chuan)
                 {
-                    var es = GameControll.instance.activeSw.ess;
-                    if (es.Count > 0)
-                    {
-                        Transform target = es[0].transform;
-                        float dis = Vector3.SqrMagnitude(target.position - tr.position);
-                        for (int i = 1; i < es.Count; i++)
-                        {
-                            float d = Vector3.SqrMagnitude(es[i].transform.position - tr.position);
-                            if (d < dis)
-                            {
-                                target = es[i].transform;
-                                dis = d;
-                            }
-                        }
-                        dir = Vector3.Normalize(target.position - tr.position);
-                        chuan -= 0.1f;
-                    }
-                    else
-                    {
-                        Pool.Instance.Recover("bul" + tr.name, tr);
-                    }
+                    FindEnimy();
                 }
                 else
                 {
@@ -82,31 +72,62 @@ public class FingerPoint : MonoBehaviour
         }
     }
 
+    List<Transform> tempEnimys;
+
+    private void FindEnimy()
+    {
+        var es = GameControll.instance.activeSw.ess;
+        if (es.Count > 0)
+        {
+            int begin = 0;
+            Transform target = es[begin].transform;
+            while (tempEnimys.Contains(target))
+            {
+                begin++;
+                if (begin >= es.Count)
+                {
+                    target = null;
+                }
+                else
+                    target = es[begin].transform;
+            }
+            if (target == null)
+            {
+                tempEnimys.Clear();
+                begin = 0;
+                target = es[begin].transform;
+            }
+            float dis = Vector3.SqrMagnitude(target.position - tr.position);
+            for (int i = begin; i < es.Count; i++)
+            {
+                if (!tempEnimys.Contains(es[i].transform))
+                {
+                    float d = Vector3.SqrMagnitude(es[i].transform.position - tr.position);
+                    if (d < dis)
+                    {
+                        target = es[i].transform;
+                        dis = d;
+                    }
+                }
+            }
+            tempEnimys.Add(target);
+            var t1 = new Vector3(target.position.x, 0, target.position.z);
+            var t2 = new Vector3(tr.position.x, 0, tr.position.z);
+            dir = Vector3.Normalize(t1 - t2);
+            _chuan -= 0.1f;
+        }
+        else
+        {
+            Pool.Instance.Recover("bul" + tr.name, tr);
+        }
+    }
+
     public void Ini(Vector3 dir)
     {
         this.dir = dir;
         life = 2f;
         canfly = true;
-
-        //test
-        var es = GameControll.instance.activeSw.ess;
-        if (es.Count > 0)
-        {
-            Transform target = es[0].transform;
-            float dis = Vector3.SqrMagnitude(target.position - tr.position);
-            for (int i = 1; i < es.Count; i++)
-            {
-                float d = Vector3.SqrMagnitude(es[i].transform.position - tr.position);
-                if (d < dis)
-                {
-                    target = es[i].transform;
-                    dis = d;
-                }
-            }
-            dir = Vector3.Normalize(target.position - tr.position);
-            dir.y = target.position.y;
-            this.dir = dir;
-        }
+        _chuan = chuan + (jdlv / 5) * 0.1f;
     }
 
     bool canfly;
@@ -122,10 +143,10 @@ public class FingerPoint : MonoBehaviour
             }
             else
             {
-                tr.position += dir * Time.deltaTime * 15f;
+                tr.position += dir * Time.deltaTime * 25f;
             }
         }
- 
+
     }
 
 

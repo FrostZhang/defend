@@ -413,7 +413,7 @@ namespace Together
         {
             if (init)
                 return;
-            TGGameObject.Instance();
+            AdGameobject.Instance();
             init = true;
             try
             {
@@ -429,7 +429,7 @@ namespace Together
         {
             if (init)
                 return;
-            TGGameObject.Instance();
+            AdGameobject.Instance();
             init = true;
             try
             {
@@ -445,7 +445,7 @@ namespace Together
         {
             if (init)
                 return;
-            TGGameObject.Instance();
+            AdGameobject.Instance();
             init = true;
             try
             {

@@ -224,11 +224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4464f714d4d098a43a9a87633879367b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  att: 0.35
-  chuan: 0.25
+  att: 0.4
+  chuan: 0.2
   leng: 0.75
   dir: {x: 0, y: 0, z: 0}
   life: 0
+  _chuan: 0
 --- !u!198 &198455437441057162
 ParticleSystem:
   m_ObjectHideFlags: 1

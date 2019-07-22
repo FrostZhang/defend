@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 222091351593559574}
   - component: {fileID: 114330439099874578}
   - component: {fileID: 114045531985546844}
+  - component: {fileID: 114800753808221244}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -94,6 +95,7 @@ GameObject:
   - component: {fileID: 222389475969092410}
   - component: {fileID: 114356777854487948}
   - component: {fileID: 114708074317531150}
+  - component: {fileID: 114460220434308388}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -112,6 +114,7 @@ GameObject:
   - component: {fileID: 222399779744573860}
   - component: {fileID: 114641198804879580}
   - component: {fileID: 114660301967686230}
+  - component: {fileID: 114318308548863624}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -148,6 +151,7 @@ GameObject:
   - component: {fileID: 222011297106549288}
   - component: {fileID: 114799690871204874}
   - component: {fileID: 114106343314729396}
+  - component: {fileID: 114302556635685022}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -166,6 +170,7 @@ GameObject:
   - component: {fileID: 222366963323212196}
   - component: {fileID: 114292105759525448}
   - component: {fileID: 114080238151391112}
+  - component: {fileID: 114576694310509230}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -220,6 +225,7 @@ GameObject:
   - component: {fileID: 222727211916735804}
   - component: {fileID: 114829219252401298}
   - component: {fileID: 114931258111340038}
+  - component: {fileID: 114929673499191934}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -455,7 +461,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6E38\u620F\u6682\u505C"
+  m_Text: 
+--- !u!114 &114302556635685022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644247753047366}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3d7466aab75a64ca28bb24d00026c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageid: 1005
+  text: "\u58F0\u97F3:{0} "
 --- !u!114 &114315049339761566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -483,6 +502,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114318308548863624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504564032140240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3d7466aab75a64ca28bb24d00026c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageid: 1024
+  text: "\u4E3B\u754C\u9762"
 --- !u!114 &114330439099874578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,7 +547,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u9000\u51FA\u5173\u5361"
+  m_Text: 
 --- !u!114 &114356777854487948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -548,7 +580,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5546\u5E97"
+  m_Text: 
 --- !u!114 &114449734577713946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,6 +622,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114460220434308388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330378143469580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3d7466aab75a64ca28bb24d00026c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageid: 1002
+  text: "\u5546\u5E97"
 --- !u!114 &114474898489189902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -644,6 +689,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114576694310509230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729099449235394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3d7466aab75a64ca28bb24d00026c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageid: 1025
+  text: "\u6E38\u620F\u6682\u505C"
 --- !u!114 &114578324212004464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -695,7 +753,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E3B\u754C\u9762"
+  m_Text: '
+
+'
 --- !u!114 &114647993642101746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -839,6 +899,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u58F0\u97F3\uFF1A\u5F00"
+--- !u!114 &114800753808221244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1303252377040584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3d7466aab75a64ca28bb24d00026c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageid: 1022
+  text: "\u9000\u51FA\u5173\u5361"
 --- !u!114 &114829219252401298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -871,7 +944,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8FD4\u56DE\u6E38\u620F"
+  m_Text: 
 --- !u!114 &114840675288097984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -912,7 +985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reture: {fileID: 114647993642101746}
   mus: {fileID: 114764126641290964}
-  shop: {fileID: 114764126641290964}
+  shop: {fileID: 114977576258715812}
   retry: {fileID: 114109250242597202}
   quit: {fileID: 114449734577713946}
 --- !u!114 &114905253660954324
@@ -942,6 +1015,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114929673499191934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1858751419951918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3d7466aab75a64ca28bb24d00026c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageid: 1010
+  text: "\u8FD4\u56DE\u6E38\u620F"
 --- !u!114 &114931258111340038
 MonoBehaviour:
   m_ObjectHideFlags: 1

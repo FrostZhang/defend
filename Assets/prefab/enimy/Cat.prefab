@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 195266540568239752}
   - component: {fileID: 54893365978810344}
   - component: {fileID: 136784312052740104}
-  - component: {fileID: 114083763558702088}
   - component: {fileID: 95214120332546960}
+  - component: {fileID: 114504431733217582}
   m_Layer: 9
   m_Name: Cat
   m_TagString: Untagged
@@ -1084,7 +1084,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1004326360717918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -8.83, y: 0.0006849521, z: 15.35}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4560134442415954}
@@ -1943,7 +1943,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114083763558702088
+--- !u!114 &114504431733217582
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1958,7 +1958,7 @@ MonoBehaviour:
     hp: 0
     att: 0
     speed: 0
-  dieEff: {fileID: 160086, guid: c217f262fea9e90468154f70d667707c, type: 2}
+  dieEff: {fileID: 136800, guid: 50c0d8c73dfeed248826c384c274984d, type: 2}
 --- !u!136 &136784312052740104
 CapsuleCollider:
   m_ObjectHideFlags: 1

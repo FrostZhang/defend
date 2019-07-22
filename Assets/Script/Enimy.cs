@@ -14,6 +14,7 @@ public class Enimy : MonoBehaviour
     private void Awake()
     {
         anim = transform.GetComponent<Animator>();
+        ai = GetComponent<NavMeshAgent>();
     }
     public void ini(Transform trg)
     {
@@ -23,9 +24,11 @@ public class Enimy : MonoBehaviour
     IEnumerator _ini()
     {
         yield return null;
-        ai = GetComponent<NavMeshAgent>();
-        ai.speed = data.speed;
-        ai.destination = target.position;
+        if (ai)
+        {
+            ai.speed = data.speed;
+            ai.destination = target.position;
+        }
     }
 
     public void Pause(bool b)
@@ -44,13 +47,11 @@ public class Enimy : MonoBehaviour
         data.hp -= demage;
         if (data.hp <= 0)
         {
-            ai.isStopped = true;
             Kill();
             //敌人死亡  获得收益
-            int c = 15 + GameControll.instance.activeSw.target.jddata.level * 5;
+            int c = Random.Range(10, 35) + GameControll.instance.activeSw.target.jddata.level * 2;
             GameUI.instance.ShowGetCoin(c, transform.position);
             GameControll.instance.GetCoin(c);
-            //Instantiate(GameControll.instance.pointEff, transform.position, Quaternion.identity);
         }
     }
 
@@ -60,10 +61,17 @@ public class Enimy : MonoBehaviour
         {
             return;
         }
-        Instantiate(dieEff, transform.position, Quaternion.identity);
+        die = true;
+        if (ai)
+            ai.isStopped = true;
+        var efc = Instantiate(dieEff, transform.position, Quaternion.identity);
+        var music = efc.GetComponent<AudioSource>();
+        if (music)
+        {
+            music.mute = !GlobelControl.instance.music;
+        }
         GameControll.instance.activeSw.OnenimyDie(this);
         Destroy(gameObject, 0.25f);
-        die = true;
     }
 
     void Update()

@@ -96,4 +96,27 @@ public class Pool
             items[poolname].Push(item);
         }
     }
+
+    public void RemoveAll()
+    {
+        items.Clear();
+    }
+
+    public void Remove(string poolname, bool clearkey = true)
+    {
+        if (items.ContainsKey(poolname))
+        {
+            if (!clearkey)
+            {
+                while (items[poolname].Count>1)
+                {
+                    items[poolname].Pop();
+                }
+            }
+            else
+            {
+                items.Remove(poolname);
+            }
+        }
+    }
 }

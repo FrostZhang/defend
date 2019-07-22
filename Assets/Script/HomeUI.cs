@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class HomeUI : MonoBehaviour {
-    public Button start, shop, chose, set,music,ret,cleart;
+public class HomeUI : MonoBehaviour
+{
+    public Button start, shop, chose, set, music, ret, cleart;
     public GameObject main, setobj;
-    
-	void Start () {
+    public Button lebtn, ribtn;
 
+    public SystemLanguage[] cuslan;
+    void Start()
+    {
+        ShowMusic();
         start.onClick.AddListener(() =>
         {
             GlobelControl.instance.panelControl.OpenPanel<StageChoose>();
@@ -30,32 +34,81 @@ public class HomeUI : MonoBehaviour {
         {
             main.SetActive(false);
             setobj.SetActive(true);
-            if (GlobelControl.instance.music)
-            {
-                music.GetComponentInChildren<Text>().text = "声音:开";
-            }
-            else
-            {
-                music.GetComponentInChildren<Text>().text = "声音:关";
-            }
+            ShowMusic();
         });
         music.onClick.AddListener(() =>
         {
             GlobelControl.instance.Setmusic();
-            if (GlobelControl.instance.music)
-            {
-                music.GetComponentInChildren<Text>().text = "声音:开";
-            }
-            else
-            {
-                music.GetComponentInChildren<Text>().text = "声音:关";
-            }
+            ShowMusic();
         });
         ret.onClick.AddListener(() =>
         {
             main.SetActive(true);
             setobj.SetActive(false);
         });
+        SetLan();
     }
 
+    private void SetLan()
+    {
+        lebtn.onClick.AddListener(() =>
+        {
+            for (int i = 0; i < cuslan.Length; i++)
+            {
+                if (cuslan[i] == GlobelControl.instance.cuslanguage ||
+                GlobelControl.instance.cuslanguage == SystemLanguage.Unknown)
+                {
+                    if (i == 0)
+                    {
+                        GlobelControl.instance.cuslanguage = cuslan[cuslan.Length - 1];
+                    }
+                    else
+                    {
+                        GlobelControl.instance.cuslanguage = cuslan[i - 1];
+                    }
+                    GlobelControl.instance.UpUiText();
+                    ShowMusic();
+                    return;
+                }
+            }
+        });
+        ribtn.onClick.AddListener(() =>
+        {
+            for (int i = 0; i < cuslan.Length; i++)
+            {
+                if (cuslan[i] == GlobelControl.instance.cuslanguage ||
+                GlobelControl.instance.cuslanguage == SystemLanguage.Unknown)
+                {
+                    if (i == cuslan.Length - 1)
+                    {
+                        GlobelControl.instance.cuslanguage = cuslan[0];
+                    }
+                    else
+                    {
+                        GlobelControl.instance.cuslanguage = cuslan[i + 1];
+                    }
+                    GlobelControl.instance.UpUiText();
+                    ShowMusic();
+                    return;
+                }
+            }
+        });
+    }
+
+    private void ShowMusic()
+    {
+        Font font;
+        string sy;
+        sy = Language.instance.GetLan("1005",out font);
+        if (GlobelControl.instance.music)
+        {
+            sy = string.Format(sy, Language.instance.GetLan("1008", out font));
+        }
+        else
+        {
+            sy = string.Format(sy, Language.instance.GetLan("1009", out font));
+        }
+        music.GetComponentInChildren<Text>().text = sy;
+        music.GetComponentInChildren<Text>().font = font;
+    }
 }

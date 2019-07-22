@@ -45,7 +45,7 @@ public class JD : MonoBehaviour
     public void Ini()
     {
         ShowHpText();
-        StartCoroutine(inicapos());
+        //StartCoroutine(inicapos());
     }
 
     private void ShowHpText()

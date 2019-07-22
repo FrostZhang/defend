@@ -7,6 +7,15 @@ public class GlobelControl : MonoBehaviour
     public static GlobelControl instance;
 
     public int chooseStage;
+    public List<GFont> gfs;
+    [System.Serializable]
+    public class GFont
+    {
+        public SystemLanguage sysyemlanguage;
+        public Font font;
+    }
+
+    public SystemLanguage cuslanguage = SystemLanguage.Unknown;
 
     public GameData.StageData stagedata;
     public const string Stagedata = "Stagedata";
@@ -20,6 +29,7 @@ public class GlobelControl : MonoBehaviour
     public const string Cusdata = "Cusdata";
 
     public bool music;
+    public Language lan;
     private void Awake()
     {
         if (instance == null)
@@ -41,6 +51,20 @@ public class GlobelControl : MonoBehaviour
         ReadStageData();
 
         music = PlayerPrefs.GetInt("music", 1) == 1 ? true : false;
+        lan = new Language();
+        lan.Ini();
+        uits = new List<UIText>();
+        Application.targetFrameRate = 35;
+    }
+
+    void Start()
+    {
+        //设置屏幕自动旋转， 并置支持的方向
+        Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
     }
 
     private void ReadStageData()
@@ -59,13 +83,18 @@ public class GlobelControl : MonoBehaviour
 
     public void SetStar(int startnum)
     {
-        if (chooseStage+1 <= stagedata.fs.Count)
+        if (chooseStage + 1 <= stagedata.fs.Count)
         {
-            stagedata.fs[chooseStage] = startnum;
+            if (startnum > stagedata.fs[chooseStage])
+            {
+                stagedata.fs[chooseStage] = startnum;
+            }
+            SaveStageData();
         }
-        else if(chooseStage == stagedata.fs.Count)
+        else if (chooseStage == stagedata.fs.Count)
         {
             stagedata.fs.Add(startnum);
+            SaveStageData();
         }
         else
         {
@@ -83,14 +112,14 @@ public class GlobelControl : MonoBehaviour
         }
         else
         {
-            cusdata = new GameData.CusData() { money = 0, stagelevel = 0, gun = 0, guns = new List<int>() {0} };
+            cusdata = new GameData.CusData() { money = 0, stagelevel = 0, gun = 0, guns = new List<int>() { 0 } };
         }
         ChooseGun(cusdata.gun);
     }
 
     public void CanLvup()
     {
-        if (chooseStage ==cusdata.stagelevel)
+        if (chooseStage == cusdata.stagelevel)
         {
             cusdata.stagelevel++;
             SaveCusd();
@@ -138,4 +167,24 @@ public class GlobelControl : MonoBehaviour
         }
     }
 
+
+    List<UIText> uits;
+    public void Regist(UIText ut, bool isre)
+    {
+        if (isre)
+        {
+            uits.Add(ut);
+        }
+        else
+        {
+            uits.Remove(ut);
+        }
+    }
+    public void UpUiText()
+    {
+        foreach (var item in uits)
+        {
+            item.Uptext();
+        }
+    }
 }

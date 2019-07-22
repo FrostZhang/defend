@@ -11,14 +11,7 @@ public class PausePanel : MonoBehaviour
     private void Start()
     {
         AdScript.instance.ShowPauseAd(true);
-        if (GlobelControl.instance.music)
-        {
-            mus.GetComponentInChildren<Text>().text = "声音:开";
-        }
-        else
-        {
-            mus.GetComponentInChildren<Text>().text = "声音:关";
-        }
+        ShowMusic();
         GameControll.instance.Pause(true);
         reture.onClick.AddListener(() =>
         {
@@ -28,16 +21,10 @@ public class PausePanel : MonoBehaviour
         mus.onClick.AddListener(() =>
         {
             GlobelControl.instance.Setmusic();
-            if (GlobelControl.instance.music)
-            {
-                mus.GetComponentInChildren<Text>().text = "声音:开";
-            }
-            else
-            {
-                mus.GetComponentInChildren<Text>().text = "声音:关";
-            }
+            ShowMusic();
         });
-        shop.onClick.AddListener(() => {
+        shop.onClick.AddListener(() =>
+        {
             GlobelControl.instance.panelControl.OpenPanel<Shop>();
         });
         retry.onClick.AddListener(() =>
@@ -51,6 +38,23 @@ public class PausePanel : MonoBehaviour
             SceneManager.LoadScene("Home");
         });
 
+    }
+
+    private void ShowMusic()
+    {
+        Font font;
+        string sy;
+        sy = Language.instance.GetLan("1005", out font);
+        if (GlobelControl.instance.music)
+        {
+            sy = string.Format(sy, Language.instance.GetLan("1008", out font));
+        }
+        else
+        {
+            sy = string.Format(sy, Language.instance.GetLan("1009", out font));
+        }
+        mus.GetComponentInChildren<Text>().text = sy;
+        mus.GetComponentInChildren<Text>().font = font;
     }
 
     private void OnDestroy()

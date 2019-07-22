@@ -506,8 +506,8 @@ GameObject:
   - component: {fileID: 195643371093393036}
   - component: {fileID: 54714049919988644}
   - component: {fileID: 136330081440260986}
-  - component: {fileID: 114146283968917828}
   - component: {fileID: 95114012739362184}
+  - component: {fileID: 114899682168698888}
   m_Layer: 9
   m_Name: Owl
   m_TagString: Untagged
@@ -1325,7 +1325,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742295558815542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.51777, y: 0.00068640156, z: 3.043213}
+  m_LocalPosition: {x: -0.44, y: 0.000684706, z: 18.48}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4214147650442126}
@@ -1452,7 +1452,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114146283968917828
+--- !u!114 &114899682168698888
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1467,7 +1467,7 @@ MonoBehaviour:
     hp: 0
     att: 0
     speed: 0
-  dieEff: {fileID: 130346, guid: 07bf9ced87963e24299c2c2a22bfeeb6, type: 2}
+  dieEff: {fileID: 136800, guid: 50c0d8c73dfeed248826c384c274984d, type: 2}
 --- !u!136 &136330081440260986
 CapsuleCollider:
   m_ObjectHideFlags: 1

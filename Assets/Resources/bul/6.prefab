@@ -287,10 +287,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   att: 1
-  chuan: 0.4
-  leng: 0.35
+  chuan: 0.5
+  leng: 0.4
   dir: {x: 0, y: 0, z: 0}
   life: 0
+  _chuan: 0
 --- !u!198 &198032291090912768
 ParticleSystem:
   m_ObjectHideFlags: 1

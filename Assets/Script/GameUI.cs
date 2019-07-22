@@ -42,7 +42,7 @@ public class GameUI : MonoBehaviour
         lvupbtn.GetComponent<Button>().onClick.AddListener(OnLvUp);
         pause.onClick.AddListener(() =>
         {
-           GlobelControl.instance.panelControl.OpenPanel<PausePanel>();
+            GlobelControl.instance.panelControl.OpenPanel<PausePanel>();
         });
         Fire();
     }
@@ -58,7 +58,7 @@ public class GameUI : MonoBehaviour
         joy.line.position, Quaternion.identity, GameControll.instance.activeSw.transform);
                 var bul = t.GetComponent<FingerPoint>();
                 bul.Ini(Vector3.Normalize(joy.line.right));
-                _fire = GlobelControl.instance.activegun.leng;
+                _fire = 1 - GlobelControl.instance.activegun.leng;
                 canfire = false;
             }
         });
@@ -117,10 +117,10 @@ public class GameUI : MonoBehaviour
         if (GlobelControl.instance.cusdata.money >= pay)
         {
             lvupbtn.gameObject.SetActive(true);
+            lvupbtn.Find("coin").GetComponent<Text>().text = pay.ToString();
             if (lvtween == null || !lvtween.IsPlaying())
             {
                 lvtween = lvupbtn.DOScale(1.1f, 0.5f).SetLoops(-1);
-                lvupbtn.Find("coin").GetComponent<Text>().text = pay.ToString();
             }
         }
         else

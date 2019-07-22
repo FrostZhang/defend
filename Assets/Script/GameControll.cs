@@ -28,6 +28,10 @@ public class GameControll : MonoBehaviour
         if (GlobelControl.instance)
         {
             GlobelControl.instance.panelControl.Clear();
+            for (int i = 0; i < 7; i++)
+            {
+                Pool.Instance.Remove("bul" + i, false);
+            }
         }
         instance = null;
     }
