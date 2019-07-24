@@ -3,10 +3,10 @@ using System.Collections;
 
 namespace Together
 {
-    public class AdGameobject : MonoBehaviour
+    public class TGGameObject : MonoBehaviour
     {
-        private static AdGameobject instance = null;
-        public static AdGameobject Instance()
+        private static TGGameObject instance = null;
+        public static TGGameObject Instance()
         {
             if (instance == null)
             {
@@ -14,7 +14,7 @@ namespace Together
                 go.hideFlags = HideFlags.HideAndDontSave;
                 DontDestroyOnLoad(go);
 
-                instance = go.AddComponent<AdGameobject>();
+                instance = go.AddComponent<TGGameObject>();
             }
             return instance;
         }
