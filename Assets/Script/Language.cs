@@ -9,10 +9,12 @@ public class Language
 {
     public Dictionary<string, Dictionary<string, string>> language;
     public static Language instance;
+
+    public bool isok;
     public void Ini()
     {
         instance = this;
-        string path = Application.streamingAssetsPath + "/Language.csv";
+        string path = "file:///" + Application.streamingAssetsPath + "/Language.csv";
 #if UNITY_STANDALONE
         path =Application.streamingAssetsPath + "/Language.csv";
 #elif UNITY_EDITOR
@@ -20,7 +22,7 @@ public class Language
 #elif UNITY_IPHONE
     path = Application.streamingAssetsPath + "/Language.csv";
 #elif UNITY_ANDROID
-    path ="file:///" + Application.streamingAssetsPath + "/Language.csv";
+    path = Application.streamingAssetsPath + "/Language.csv";
 #endif
         Debug.Log("读取语言文件:"+path);
 
@@ -107,20 +109,17 @@ public class Language
         Dictionary<string, Dictionary<string, string>> result = new Dictionary<string, Dictionary<string, string>>();
         string[] fileData;
 #if UNITY_EDITOR || UNITY_STANDALONE
-        fileData =System.IO.File.ReadAllLines(filePath);
-#elif   UNITY_ANDROID && !UNITY_EDITOR
-        Debug.Log("读取了安卓资料"+ File.Exists(filePath));
+        //fileData =System.IO.File.ReadAllLines(filePath);
         WWW www = new WWW(filePath);
         while (!www.isDone)
             yield return null;
-        Debug.Log(www.bytes);
         fileData = www.text.Split(new string[] { "\r\n" }, System.StringSplitOptions.None);
-        Debug.Log(fileData.Length);
+#elif   UNITY_ANDROID && !UNITY_EDITOR
+        WWW www = new WWW(filePath);
+        while (!www.isDone)
+            yield return null;
+        fileData = www.text.Split(new string[] { "\r\n" }, System.StringSplitOptions.None);
 #endif
-        if (!File.Exists(filePath))
-        {
-            Debug.Log("找不到资料");
-        }
         /* CSV文件的第一行为Key字段，第二行开始是数据。第一个字段一定是ID。 */
         string[] keys = fileData[0].Split(',');
         for (int i = 1; i < fileData.Length; i++)
@@ -137,5 +136,6 @@ public class Language
         }
         language = result;
         yield return null;
+        isok = true;
     }
 }

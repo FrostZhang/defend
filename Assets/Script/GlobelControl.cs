@@ -27,6 +27,7 @@ public class GlobelControl : MonoBehaviour
 
     public const string JDdata = "JDdata";
     public const string Cusdata = "Cusdata";
+    public const string Cuslan = "Cuslan";
 
     public bool music;
     public Language lan;
@@ -55,6 +56,8 @@ public class GlobelControl : MonoBehaviour
         lan.Ini();
         uits = new List<UIText>();
         Application.targetFrameRate = 35;
+
+        cuslanguage = (SystemLanguage)PlayerPrefs.GetInt(Cuslan, 42);
     }
 
     void Start()
@@ -167,6 +170,11 @@ public class GlobelControl : MonoBehaviour
         }
     }
 
+    public void Setlan(SystemLanguage lan)
+    {
+        cuslanguage = lan;
+        PlayerPrefs.SetInt(Cuslan, (int)cuslanguage);
+    }
 
     List<UIText> uits;
     public void Regist(UIText ut, bool isre)

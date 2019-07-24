@@ -11,6 +11,7 @@ public class HomeUI : MonoBehaviour
     public Button lebtn, ribtn;
 
     public SystemLanguage[] cuslan;
+
     void Start()
     {
         ShowMusic();
@@ -60,11 +61,11 @@ public class HomeUI : MonoBehaviour
                 {
                     if (i == 0)
                     {
-                        GlobelControl.instance.cuslanguage = cuslan[cuslan.Length - 1];
+                        GlobelControl.instance.Setlan(cuslan[cuslan.Length - 1]);
                     }
                     else
                     {
-                        GlobelControl.instance.cuslanguage = cuslan[i - 1];
+                        GlobelControl.instance.Setlan(cuslan[i - 1]);
                     }
                     GlobelControl.instance.UpUiText();
                     ShowMusic();
@@ -81,11 +82,11 @@ public class HomeUI : MonoBehaviour
                 {
                     if (i == cuslan.Length - 1)
                     {
-                        GlobelControl.instance.cuslanguage = cuslan[0];
+                        GlobelControl.instance.Setlan(cuslan[0]);
                     }
                     else
                     {
-                        GlobelControl.instance.cuslanguage = cuslan[i + 1];
+                        GlobelControl.instance.Setlan(cuslan[i + 1]);
                     }
                     GlobelControl.instance.UpUiText();
                     ShowMusic();

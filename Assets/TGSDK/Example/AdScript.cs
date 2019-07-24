@@ -38,7 +38,7 @@ public class AdScript : MonoBehaviour
             Debug.Log("TGSDK GetIsAgeRestrictedUser = " + TGSDK.GetIsAgeRestrictedUser());
             TGSDK.SetIsAgeRestrictedUser("no");
             float bannerHeight = (float)(Screen.height) * 0.123f;
-            //TGSDK.SetBannerConfig("banner0", "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
+            TGSDK.SetBannerConfig("OSL4KTuf4BoLhG0y0yF", "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
             //TGSDK.SetBannerConfig("banner1", "TGBannerNormal", 0, Display.main.systemHeight - 2 * bannerHeight, Display.main.systemWidth, bannerHeight, 30);
             //TGSDK.SetBannerConfig("banner2", "TGBannerNormal", 0, Display.main.systemHeight - 3 * bannerHeight, Display.main.systemWidth, bannerHeight, 30);
         };
@@ -47,6 +47,8 @@ public class AdScript : MonoBehaviour
 #elif UNITY_ANDROID && !UNITY_EDITOR
 		TGSDK.Initialize ("2I064Z57Ha35k123CpX3");//59t5rJH783hEQ3Jd7Zqr
 #endif
+
+        Invoke("PreloadAd", 0.5f);
     }
 
     public void Log(string message)
