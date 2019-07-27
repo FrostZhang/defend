@@ -8,6 +8,14 @@ using System;
 
 public class AdScript : MonoBehaviour
 {
+    public string appid;
+    public string bannerid;
+
+    public string appidguoji;
+    public string banneridguoji;
+
+    public bool isguoji;
+
     public InputField sceneId;
     public Text logField;
 
@@ -38,6 +46,14 @@ public class AdScript : MonoBehaviour
             Debug.Log("TGSDK GetIsAgeRestrictedUser = " + TGSDK.GetIsAgeRestrictedUser());
             TGSDK.SetIsAgeRestrictedUser("no");
             float bannerHeight = (float)(Screen.height) * 0.123f;
+            if (isguoji)
+            {
+                TGSDK.SetBannerConfig(banneridguoji, "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
+            }
+            else
+            {
+                TGSDK.SetBannerConfig(bannerid, "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
+            }
             TGSDK.SetBannerConfig("OSL4KTuf4BoLhG0y0yF", "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
             //TGSDK.SetBannerConfig("banner1", "TGBannerNormal", 0, Display.main.systemHeight - 2 * bannerHeight, Display.main.systemWidth, bannerHeight, 30);
             //TGSDK.SetBannerConfig("banner2", "TGBannerNormal", 0, Display.main.systemHeight - 3 * bannerHeight, Display.main.systemWidth, bannerHeight, 30);
@@ -45,9 +61,15 @@ public class AdScript : MonoBehaviour
 #if UNITY_IOS && !UNITY_EDITOR
 		TGSDK.Initialize ("hP7287256x5z1572E5n7");
 #elif UNITY_ANDROID && !UNITY_EDITOR
-		TGSDK.Initialize ("2I064Z57Ha35k123CpX3");//59t5rJH783hEQ3Jd7Zqr
+	    if (isguoji)
+        {
+            TGSDK.Initialize(appidguoji);
+        }
+        else
+        {
+            TGSDK.Initialize(appid);
+        }//59t5rJH783hEQ3Jd7Zqr
 #endif
-
         Invoke("PreloadAd", 0.5f);
     }
 
