@@ -54,7 +54,7 @@ public class AdScript : MonoBehaviour
             {
                 TGSDK.SetBannerConfig(bannerid, "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
             }
-            TGSDK.SetBannerConfig("OSL4KTuf4BoLhG0y0yF", "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
+            //TGSDK.SetBannerConfig("OSL4KTuf4BoLhG0y0yF", "TGBannerNormal", 0, Display.main.systemHeight - bannerHeight, Display.main.systemWidth, bannerHeight, 30);
             //TGSDK.SetBannerConfig("banner1", "TGBannerNormal", 0, Display.main.systemHeight - 2 * bannerHeight, Display.main.systemWidth, bannerHeight, 30);
             //TGSDK.SetBannerConfig("banner2", "TGBannerNormal", 0, Display.main.systemHeight - 3 * bannerHeight, Display.main.systemWidth, bannerHeight, 30);
         };

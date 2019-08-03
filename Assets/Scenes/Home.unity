@@ -32918,6 +32918,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0063e515499a9414292362ef15d4015f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appid: 2I064Z57Ha35k123CpX3
+  bannerid: OSL4KTuf4BoLhG0y0yF
+  appidguoji: e71j98wY7TBNJ024pY48
+  banneridguoji: 6HrwsV1sWRW9HZpS9F6
+  isguoji: 1
   sceneId: {fileID: 0}
   logField: {fileID: 0}
 --- !u!4 &1234406308
